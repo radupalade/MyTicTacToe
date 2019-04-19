@@ -37,6 +37,7 @@ public class MyTicTacToe {
         }
     }
 
+
     public Move readMove() {
         Scanner s = new Scanner(System.in);
         System.out.println("make move");
@@ -47,12 +48,35 @@ public class MyTicTacToe {
         Move move = new Move(myLine, myCol);
 
         return move;
-
     }
+
+    /*
+     * trebuie sa returneze true daca mutarea e valida si false daca mutarea e invalida
+     * */
+    public boolean validateMove(Move move) {
+        if (move.col >= 3 && move.line >= 3) {
+            System.out.println("mutare invalida");
+            return false;
+
+        }
+
+        if (game[move.line][move.col] == SYMBOL_X || game[move.line][move.col] == SYMBOL_0) {
+            System.out.println("mutare invalida");
+            return false;
+        }
+
+        // testez daca in joc la linia si coloana respectiva exista deja un simbol
+
+        return true;
+    }
+
 
     public void makeMove(Move move, char symbol) {
         game[move.line][move.col] = symbol;
+
+
     }
+
 
     public boolean isWinLine(int line, char symbol) {
         boolean isWin = true;
@@ -123,6 +147,7 @@ public class MyTicTacToe {
         return isWin;
     }
 
+
     public void playGame() {
 
         initBoard();
@@ -136,12 +161,19 @@ public class MyTicTacToe {
 
         while (isWin == false && nrMoves < GAME_SIZE * GAME_SIZE) {
 
-            //citesc mutare
             Move move = readMove();
-            System.out.println(move.line);
-            System.out.println(move.col);
-
             //validez mutare
+            boolean moveIsValid = validateMove(move);
+
+            while (!moveIsValid) {
+                // read move
+                move = readMove();
+
+                System.out.println(move.line);
+                System.out.println(move.col);
+
+                moveIsValid = validateMove(move);
+            }
 
             //efectuez mutare
             makeMove(move, currentSymbol);
@@ -170,7 +202,8 @@ public class MyTicTacToe {
             System.out.println(currentPlayer.name + " " + "este castigator");
         } else {
             System.out.println("nici un castigator");
-        }
-    }
 
+        }
+
+    }
 }

@@ -15,7 +15,26 @@ public class Main {
         Player player2 = new Player(player2Name);
 
         MyTicTacToe myTicTacToe = new MyTicTacToe(player1, player2);
-        myTicTacToe.playGame();
+
+        boolean playGame = true;
+        while (playGame) {
+            myTicTacToe.playGame();
+            System.out.println("doriti sa incepeti un joc nou ? please answer with yes or no");
+            String playAnotherGame = scanner.nextLine().trim().toLowerCase();
+
+            if (playAnotherGame.equals("yes")) {
+                playGame = true;
+            } else if (playAnotherGame.equals("no")) {
+                playGame = false;
+
+            } else {
+                System.out.println("not a valid answer , please answer with yes or no");
+                playGame = false;
+            }
+
+            // test answer
+
+        }
 
 
     }
