@@ -55,13 +55,11 @@ public class MyTicTacToe {
      * */
     public boolean validateMove(Move move) {
         if (move.col >= 3 && move.line >= 3) {
-            System.out.println("mutare invalida");
             return false;
 
         }
 
         if (game[move.line][move.col] == SYMBOL_X || game[move.line][move.col] == SYMBOL_0) {
-            System.out.println("mutare invalida");
             return false;
         }
 
@@ -167,12 +165,15 @@ public class MyTicTacToe {
 
             while (!moveIsValid) {
                 // read move
+                System.out.println("mutare invalida");
+
                 move = readMove();
 
                 System.out.println(move.line);
                 System.out.println(move.col);
 
                 moveIsValid = validateMove(move);
+
             }
 
             //efectuez mutare
